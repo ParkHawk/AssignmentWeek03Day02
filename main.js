@@ -101,32 +101,43 @@ let formData = [
   for (x = 0; x < formData.length; x++){
     let fields = document.getElementById("fields");
     let input = document.createElement("input");
-
-
     let select = document.createElement("select");
+
+
     if (formData[x]["type"] === "select") {
-
-
       for (i = 0; i < formData[x].options.length; i++) {
 
         let choices = document.createElement("option");
-        let text = document.createTextNode(formData[x].options[i]["label"]);
+        // let text = document.createTextNode(formData[x].options[i]["label"]);
         fields.appendChild(select);
         select.appendChild(choices);
           choices.setAttribute("value", formData[x].options[i]["value"]);
           choices.text = formData[x].options[i]["label"];
       }
+    } else if (formData[x]["type"] === "textarea") {
+        let textarea = document.createElement("textarea")
+
+        fields.appendChild(textarea);
+
+        textarea.setAttribute("type", formData[x]["type"] );
+        textarea.setAttribute("placeholder", formData[x]["label"]);
+        textarea.setAttribute("id", formData[x]["id"]);
+        textarea.setAttribute("class", formData[x]["icon"]);
+        textarea.setAttribute("option", formData[x]["options"]);
+
+    } else {
+      input.setAttribute("type", formData[x]["type"] );
+      input.setAttribute("placeholder", formData[x]["label"]);
+      input.setAttribute("id", formData[x]["id"]);
+      input.setAttribute("class", formData[x]["icon"]);
+      input.setAttribute("option", formData[x]["options"]);
+
+      fields.appendChild(input);
+
     }
-    if (x === 4) {
-      x=5
-    }
-
-    input.setAttribute("type", formData[x]["type"] );
-    input.setAttribute("placeholder", formData[x]["label"]);
-    input.setAttribute("id", formData[x]["id"]);
-    input.setAttribute("icon", formData[x]["icon"]);
-    input.setAttribute("option", formData[x]["options"]);
+    // if (x === 4) {
+    //   x=5
+    // }
 
 
-    fields.appendChild(input);
   }
